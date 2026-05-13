@@ -18,6 +18,7 @@ namespace LibraryManagementSystem
         {
             InitializeComponent();
             LoadCategories();
+            ValidateInput();
         }
         private void LoadCategories()
         {
@@ -91,5 +92,9 @@ namespace LibraryManagementSystem
             Close();
         }
 
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

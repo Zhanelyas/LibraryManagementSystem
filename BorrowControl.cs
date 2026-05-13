@@ -30,14 +30,30 @@ namespace LibraryManagementSystem
             cmbBooks.DisplayMember = "Title";
             cmbBooks.ValueMember = "BookId";
 
-            var borrows = context.Borrows
+            var borrowsRaw = context.Borrows
+    .Select(b => new
+    {
+        b.BorrowId,
+        Student = b.Student.Name,
+        Book = b.Book.Title,
+        b.BorrowDate,
+        b.ReturnDate,
+        PageCount = b.Book.PageCount
+    })
+    .ToList();
+
+            var borrows = borrowsRaw
                 .Select(b => new
                 {
                     b.BorrowId,
-                    Student = b.Student.Name,
-                    Book = b.Book.Title,
+                    b.Student,
+                    b.Book,
                     b.BorrowDate,
-                    b.ReturnDate
+                    b.ReturnDate,
+                    LateRiskScore = LibraryAlgorithm.CalculateLateRiskScore(
+                        b.BorrowDate,
+                        b.ReturnDate,
+                        b.PageCount)
                 })
                 .ToList();
 

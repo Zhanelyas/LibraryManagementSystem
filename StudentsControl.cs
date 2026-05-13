@@ -62,5 +62,10 @@ namespace LibraryManagementSystem
             txtSearch.Clear();
             LoadStudents();
         }
+
+        private void dgvStudents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

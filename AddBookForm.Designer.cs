@@ -40,6 +40,7 @@
             btnOkay = new Button();
             btnCancel = new Button();
             errorProvider1 = new ErrorProvider(components);
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)numYear).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numPages).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
@@ -48,84 +49,91 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(66, 57);
+            label1.Location = new Point(58, 43);
             label1.Name = "label1";
-            label1.Size = new Size(38, 20);
+            label1.Size = new Size(30, 15);
             label1.TabIndex = 0;
             label1.Text = "Title";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(70, 149);
+            label2.Location = new Point(61, 112);
             label2.Name = "label2";
-            label2.Size = new Size(115, 20);
+            label2.Size = new Size(92, 15);
             label2.TabIndex = 1;
             label2.Text = "Publication Year";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(348, 57);
+            label3.Location = new Point(304, 43);
             label3.Name = "label3";
-            label3.Size = new Size(84, 20);
+            label3.Size = new Size(69, 15);
             label3.TabIndex = 2;
             label3.Text = "Page Count";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(348, 149);
+            label4.Location = new Point(304, 112);
             label4.Name = "label4";
-            label4.Size = new Size(86, 20);
+            label4.Size = new Size(68, 15);
             label4.TabIndex = 3;
             label4.Text = "Category Id";
             // 
             // txtTitle
             // 
-            txtTitle.Location = new Point(66, 95);
+            txtTitle.Location = new Point(58, 71);
+            txtTitle.Margin = new Padding(3, 2, 3, 2);
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(125, 27);
+            txtTitle.Size = new Size(110, 23);
             txtTitle.TabIndex = 4;
+            txtTitle.TextChanged += txtTitle_TextChanged;
             // 
             // numYear
             // 
-            numYear.Location = new Point(66, 188);
+            numYear.Location = new Point(58, 141);
+            numYear.Margin = new Padding(3, 2, 3, 2);
             numYear.Name = "numYear";
-            numYear.Size = new Size(150, 27);
+            numYear.Size = new Size(131, 23);
             numYear.TabIndex = 5;
             // 
             // numPages
             // 
-            numPages.Location = new Point(348, 95);
+            numPages.Location = new Point(304, 71);
+            numPages.Margin = new Padding(3, 2, 3, 2);
             numPages.Name = "numPages";
-            numPages.Size = new Size(150, 27);
+            numPages.Size = new Size(131, 23);
             numPages.TabIndex = 6;
             // 
             // cmbCategory
             // 
             cmbCategory.FormattingEnabled = true;
-            cmbCategory.Location = new Point(347, 187);
+            cmbCategory.Location = new Point(304, 140);
+            cmbCategory.Margin = new Padding(3, 2, 3, 2);
             cmbCategory.Name = "cmbCategory";
-            cmbCategory.Size = new Size(151, 28);
+            cmbCategory.Size = new Size(133, 23);
             cmbCategory.TabIndex = 7;
             cmbCategory.SelectedIndexChanged += cmbCategory_SelectedIndexChanged;
             // 
             // btnOkay
             // 
-            btnOkay.Location = new Point(146, 273);
+            btnOkay.Location = new Point(128, 205);
+            btnOkay.Margin = new Padding(3, 2, 3, 2);
             btnOkay.Name = "btnOkay";
-            btnOkay.Size = new Size(94, 29);
+            btnOkay.Size = new Size(82, 22);
             btnOkay.TabIndex = 8;
-            btnOkay.Text = "Okay";
+            btnOkay.Text = "Add";
             btnOkay.UseVisualStyleBackColor = true;
             btnOkay.Click += btnOkay_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(287, 273);
+            btnCancel.Location = new Point(251, 205);
+            btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(94, 29);
+            btnCancel.Size = new Size(82, 22);
             btnCancel.TabIndex = 9;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -135,11 +143,22 @@
             // 
             errorProvider1.ContainerControl = this;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(60, 11);
+            label5.Name = "label5";
+            label5.Size = new Size(62, 15);
+            label5.TabIndex = 10;
+            label5.Text = "Add book:";
+            label5.Click += label5_Click;
+            // 
             // AddBookForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(834, 526);
+            ClientSize = new Size(598, 394);
+            Controls.Add(label5);
             Controls.Add(btnCancel);
             Controls.Add(btnOkay);
             Controls.Add(cmbCategory);
@@ -150,6 +169,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AddBookForm";
             Text = "AddBookForm";
             ((System.ComponentModel.ISupportInitialize)numYear).EndInit();
@@ -172,5 +192,6 @@
         private Button btnOkay;
         private Button btnCancel;
         private ErrorProvider errorProvider1;
+        private Label label5;
     }
 }

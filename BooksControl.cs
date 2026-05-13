@@ -30,17 +30,34 @@ namespace LibraryManagementSystem
             using var context = new ZhanelDbContext();
 
             var books = context.Books
-                .Select(b => new
+                .Select(b => new BookDisplay
                 {
-                    b.BookId,
-                    b.Title,
-                    Category = b.Category.CategoryName,
-                    b.PublicationYear,
-                    b.PageCount
+                    BookId = b.BookId,
+                    Title = b.Title,
+                    CategoryId = b.CategoryId,
+                    CategoryName = b.Category.CategoryName,
+                    PublicationYear = b.PublicationYear,
+                    PageCount = b.PageCount
                 })
                 .ToList();
 
-            dgvBooks.DataSource = books;
+            bindingSourceBooks.DataSource = books;
+
+            dgvBooks.DataSource = bindingSourceBooks;
+
+            cmbBookCategory.DataSource = context.Categories.ToList();
+            cmbBookCategory.DisplayMember = "CategoryName";
+            cmbBookCategory.ValueMember = "CategoryId";
+
+            txtBookTitle.DataBindings.Clear();
+            numBookYear.DataBindings.Clear();
+            numBookPages.DataBindings.Clear();
+            cmbBookCategory.DataBindings.Clear();
+
+            txtBookTitle.DataBindings.Add("Text", bindingSourceBooks, "Title");
+            numBookYear.DataBindings.Add("Value", bindingSourceBooks, "PublicationYear");
+            numBookPages.DataBindings.Add("Value", bindingSourceBooks, "PageCount");
+            cmbBookCategory.DataBindings.Add("SelectedValue", bindingSourceBooks, "CategoryId");
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -136,6 +153,51 @@ namespace LibraryManagementSystem
                 }
 
                 MessageBox.Show("CSV exported!");
+            }
+        }
+
+        private void dgvBooks_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnImportCsv_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.Filter = "CSV files (*.csv)|*.csv";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string[] lines = File.ReadAllLines(ofd.FileName);
+
+                using var context = new ZhanelDbContext();
+
+                foreach (string line in lines.Skip(1))
+                {
+                    string[] parts = line.Split(',');
+
+                    Book book = new Book()
+                    {
+                        Title = parts[1],
+                        CategoryId = int.Parse(parts[2]),
+                        PublicationYear = int.Parse(parts[3]),
+                        PageCount = int.Parse(parts[4])
+                    };
+
+                    context.Books.Add(book);
+                }
+
+                context.SaveChanges();
+
+                MessageBox.Show("CSV imported!");
+
+                LoadBooks();
             }
         }
     }
